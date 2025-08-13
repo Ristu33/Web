@@ -265,3 +265,45 @@ body.dark-mode #backToTop {
 	color: var(--text);
 	border-color: var(--border);
 }
+@media (max-width: 992px) {
+  .about-card {
+    grid-template-columns:1fr;
+  }
+  .brand-text .title {
+    font-size:1.7rem;
+  }
+  .subtitle {
+    font-size:0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .brand-text .title {
+    font-size:1.5rem;
+  }
+  .subtitle {
+    font-size:0.85rem;
+  }
+  .btn, .btn-secondary {
+    font-size:0.9rem;
+    padding:0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-text .title {
+    font-size:1.3rem;
+  }
+  .subtitle {
+    font-size:0.8rem;
+  }
+  .btn, .btn-secondary {
+    font-size:0.85rem;
+    padding:0.35rem 0.7rem;
+  }
+}
