@@ -1,183 +1,219 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-	<meta charset="utf-8">
-	<meta content="width=device-width, initial-scale=1" name="viewport">
-	<title>Ristu</title>
-	<meta content="個人簡介、技能、作品與聯絡方式。" name="description">
-	<link href="style.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ristu</title>
+  <meta name="description" content="個人簡介、技能、作品與聯絡方式。">
+  <link href="style.css" rel="stylesheet">
 </head>
 <body>
-	<!-- Header -->
-	<header class="site-header">
-		<div class="container header-inner">
-			<div class="bg-decoration"></div>
-			<div class="brand">
-				<a aria-label="首頁" class="logo" href="#"><picture><source srcset="./assets/avatar.webp" type="image/webp"> <img alt="Ristu Logo" src="./assets/avatar.webp"></picture></a>
-				<div class="brand-text">
-					<h1 class="title">Ristu</h1>
-					<p class="subtitle">平均懶人｜我很窮可以贊助我</p>
-				</div>
-			</div>
-			<nav class="site-nav">
-				<ul>
-					<li>
-						<a class="btn btn-glass" href="#contact" id="contactBtn">聯絡我</a>
-					</li>
-					<li><button class="btn btn-glass" id="themeToggle">深色模式</button></li>
-				</ul>
-			</nav>
-		</div>
-	</header><!-- Main Content -->
-	<main>
-		<!-- 關於我區塊 -->
-		<section class="section" id="about">
-			<div class="container about-card">
-				<div class="about-image">
-					<picture><source srcset="./assets/about-image.webp" type="image/webp"> <img alt="About Image" src="./assets/about-image.webp"></picture>
-				</div>
-				<div class="about-text">
-					<h2>關於我</h2>
-					<p>嗨！我是 <strong>Ristu</strong>，你好。</p>
-					<ul class="highlights">
-						<li>ex:1</li>
-						<li>ex:2</li>
-						<li>ex:3</li>
-					</ul>
-				</div>
-			</div>
-		</section><!-- 技能區塊 -->
-		<section class="section alt" id="skills">
-			<div class="container">
-				<h2>技能</h2>
-				<div class="chips">
-					<span class="chip">HTML5</span> <span class="chip">CSS3 / SCSS</span> <span class="chip">JavaScript</span> <span class="chip">UI/UX & A11y</span> <span class="chip">test</span> <span class="chip">test</span>
-				</div>
-			</div>
-		</section><!-- 作品區塊 -->
-		<section class="section" id="projects">
-			<div class="container">
-				<h2>作品精選</h2>
-				<div class="cards">
-					<article class="card">
-						<div class="card-body">
-							<h3>專案 A</h3>
-							<p>test</p>
-						</div>
-					</article>
-					<article class="card">
-						<div class="card-body">
-							<h3>專案 B</h3>
-							<p>test</p>
-						</div>
-					</article>
-					<article class="card">
-						<div class="card-body">
-							<h3>專案 C</h3>
-							<p>test</p>
-						</div>
-					</article>
-				</div>
-			</div>
-		</section><!-- 聯絡我區塊 -->
-		<section class="section" id="contact">
-			<div class="container">
-				<h2>聯絡我</h2>
-				<p class="muted">歡迎來信與我交流合作 🙌</p>
-				<div class="contact">
-					<button class="btn btn-glass" data-email="chenb1330@gmail.com" id="copyEmailBtn">點擊複製郵件 chenb1330@gmail.com</button> <a class="btn btn-glass" href="https://github.com/Ristu33" rel="noopener noreferrer" target="_blank">GitHub</a>
-				</div>
-			</div>
-		</section>
-	</main><!-- 回到頂部按鈕 -->
-	<button id="backToTop">回到頂部</button> <!-- Discord 回饋區塊 -->
-	<div class="message-box">
-		<input id="msgInput" placeholder="輸入訊息..." type="text"> <button onclick="sendMessage()">傳送</button>
-	</div>
-	<script>
-	function sendMessage() {
-	 const input = document.getElementById("msgInput");
 
-	 if (!input.value.trim()) {
-	   alert("請輸入訊息！");
-	   return;
-	 }
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="bg-decoration"></div>
+    <div class="brand">
+      <a aria-label="首頁" class="logo" href="#">
+        <picture>
+          <source srcset="./assets/avatar.webp" type="image/webp">
+          <img alt="Ristu Logo" src="./assets/avatar.webp">
+        </picture>
+      </a>
+      <div class="brand-text">
+        <h1 class="title">Ristu</h1>
+        <p class="subtitle">平均懶人｜我很窮可以贊助我</p>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <ul>
+        <li><a class="btn btn-glass" href="#contact" id="contactBtn">聯絡我</a></li>
+        <li><button class="btn btn-glass" id="themeToggle">深色模式</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-	 fetch("/api/send-discord", { // Cloudflare Function URL
-	   method: "POST",
-	   headers: { "Content-Type": "application/json" },
-	   body: JSON.stringify({ message: input.value })
-	 })
-	 .then(res => res.json())
-	 .then(data => {
-	   if (data.success) {
-	     alert("已傳送到 Discord！");
-	     input.value = "";
-	   } else {
-	     alert("傳送失敗: " + data.error);
-	   }
-	 })
-	 .catch(err => {
-	   console.error(err);
-	   alert("傳送失敗！");
-	 });
-	}
-	</script> <!-- Footer -->
-	<footer class="site-footer">
-		<div class="container">
-			<p>© <span id="year"></span> Ristu · 保留所有權利</p>
-		</div>
-	</footer><!-- JavaScript -->
-	<script>
-	 // 自動更新年份
-	 document.getElementById('year').textContent = new Date().getFullYear();
+<!-- Main Content -->
+<main>
+  <!-- 關於我區塊 -->
+  <section class="section" id="about">
+    <div class="container about-card">
+      <div class="about-image">
+        <picture>
+          <source srcset="./assets/about-image.webp" type="image/webp">
+          <img alt="About Image" src="./assets/about-image.webp">
+        </picture>
+      </div>
+      <div class="about-text">
+        <h2>關於我</h2>
+        <p>嗨！我是 <strong>Ristu</strong>，你好。</p>
+        <ul class="highlights">
+          <li>ex:1</li>
+          <li>ex:2</li>
+          <li>ex:3</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-	 // 複製郵件功能
-	 const copyEmailBtn = document.getElementById("copyEmailBtn");
-	 copyEmailBtn.addEventListener("click", () => {
-	   const email = copyEmailBtn.getAttribute("data-email");
-	   navigator.clipboard.writeText(email).then(() => {
-	     copyEmailBtn.textContent = "已複製！";
-	     setTimeout(() => {
-	       copyEmailBtn.textContent = "點擊複製郵件 chenb1330@gmail.com";
-	     }, 2000);
-	   });
-	 });
+  <!-- 技能區塊 -->
+  <section class="section alt" id="skills">
+    <div class="container">
+      <h2>技能</h2>
+      <div class="chips">
+        <span class="chip">HTML5</span> 
+        <span class="chip">CSS3 / SCSS</span>
+        <span class="chip">JavaScript</span> 
+        <span class="chip">UI/UX & A11y</span>
+        <span class="chip">test</span>
+        <span class="chip">test</span>
+      </div>
+    </div>
+  </section>
 
-	 // 深淺模式切換
-	 const themeToggle = document.getElementById("themeToggle");
-	 const contactBtn = document.getElementById("contactBtn");
-	 const backToTop = document.getElementById("backToTop");
+  <!-- 作品區塊 -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2>作品精選</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="card-body">
+            <h3>專案 A</h3>
+            <p>test</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>專案 B</h3>
+            <p>test</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>專案 C</h3>
+            <p>test</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-	 // 預設深色模式
-	 document.body.classList.add("dark-mode");
+  <!-- 聯絡我區塊 -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>聯絡我</h2>
+      <p class="muted">歡迎來信與我交流合作 🙌</p>
+      <div class="contact">
+        <button class="btn btn-glass" data-email="chenb1330@gmail.com" id="copyEmailBtn">
+          點擊複製郵件 chenb1330@gmail.com
+        </button>
+        <a class="btn btn-glass" href="https://github.com/Ristu33" rel="noopener noreferrer" target="_blank">
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
 
-	 function updateThemeButtonText() {
-	   if(document.body.classList.contains("dark-mode")){
-	     themeToggle.textContent = "深色模式";
-	   } else {
-	     themeToggle.textContent = "淺色模式";
-	   }
-	 }
-	 updateThemeButtonText();
+<!-- 回到頂部按鈕 -->
+<button id="backToTop">回到頂部</button>
+<!-- Discord 回饋區塊 -->
+<div class="message-box">
+  <input type="text" id="msgInput" placeholder="輸入訊息...">
+  <button onclick="sendMessage()">傳送</button>
+</div>
 
-	 themeToggle.addEventListener("click", () => {
-	   document.body.classList.toggle("dark-mode");
-	   updateThemeButtonText();
-	 });
+<script>
+function sendMessage() {
+  const input = document.getElementById("msgInput");
 
-	 // 滾動到頂部
-	 backToTop.addEventListener("click", () => {
-	   window.scrollTo({ top:0, behavior:'smooth' });
-	 });
+  if (!input.value.trim()) {
+    alert("請輸入訊息！");
+    return;
+  }
 
-	 // 平滑滾動至聯絡我
-	 contactBtn.addEventListener("click", function(e){
-	   e.preventDefault();
-	   const target = document.querySelector(this.getAttribute('href'));
-	   if(target) target.scrollIntoView({ behavior: 'smooth' });
-	 });
+  fetch("/api/send-discord", { // Cloudflare Function URL
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: input.value })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("已傳送到 Discord！");
+      input.value = "";
+    } else {
+      alert("傳送失敗: " + data.error);
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("傳送失敗！");
+  });
+}
+</script>
 
-	</script>
+
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <p>© <span id="year"></span> Ristu · 保留所有權利</p>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+  // 自動更新年份
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 複製郵件功能
+  const copyEmailBtn = document.getElementById("copyEmailBtn");
+  copyEmailBtn.addEventListener("click", () => {
+    const email = copyEmailBtn.getAttribute("data-email");
+    navigator.clipboard.writeText(email).then(() => {
+      copyEmailBtn.textContent = "已複製！";
+      setTimeout(() => {
+        copyEmailBtn.textContent = "點擊複製郵件 chenb1330@gmail.com";
+      }, 2000);
+    });
+  });
+
+  // 深淺模式切換
+  const themeToggle = document.getElementById("themeToggle");
+  const contactBtn = document.getElementById("contactBtn");
+  const backToTop = document.getElementById("backToTop");
+
+  // 預設深色模式
+  document.body.classList.add("dark-mode");
+
+  function updateThemeButtonText() {
+    if(document.body.classList.contains("dark-mode")){
+      themeToggle.textContent = "深色模式";
+    } else {
+      themeToggle.textContent = "淺色模式";
+    }
+  }
+  updateThemeButtonText();
+
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    updateThemeButtonText();
+  });
+
+  // 滾動到頂部
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+  // 平滑滾動至聯絡我
+  contactBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+
+</script>
 </body>
 </html>
