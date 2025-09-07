@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<title>Ristu</title>
-	<meta content="個人簡介、技能、作品與聯絡方式。" name="description">
+	<meta content="個人簡介、技能、作品" name="description">
 	<link href="style.css" rel="stylesheet">
 </head>
 <body>
@@ -21,9 +21,6 @@
 			</div>
 			<nav class="site-nav">
 				<ul>
-					<li>
-						<a class="btn btn-glass" href="#contact" id="contactBtn">聯絡我</a>
-					</li>
 					<li><button class="btn btn-glass" id="themeToggle">深色模式</button></li>
 				</ul>
 			</nav>
@@ -46,138 +43,145 @@
 					</ul>
 				</div>
 			</div>
-		</section><!-- 技能區塊 -->
-		<section class="section alt" id="skills">
-			<div class="container">
-				<h2>技能</h2>
-				<div class="chips">
-					<span class="chip">HTML5</span> <span class="chip">CSS3 / SCSS</span> <span class="chip">JavaScript</span> <span class="chip">UI/UX & A11y</span> <span class="chip">test</span> <span class="chip">test</span>
-				</div>
-			</div>
 		</section><!-- 作品區塊 -->
 		<section class="section" id="projects">
 			<div class="container">
-				<h2>作品精選</h2>
-				<div class="cards">
-					<article class="card">
-						<div class="card-body">
-							<h3>專案 A</h3>
-							<p>test</p>
+				<!-- 大框 -->
+				<div class="card card-large">
+					<h3>作品介紹</h3><!-- 作品 1 -->
+					<div class="project">
+						<div class="project-info">
+							<h4>作品1名稱</h4>
+							<p>這是作品1的簡短介紹，說明這個作品的特色或用途。</p>
 						</div>
-					</article>
-					<article class="card">
-						<div class="card-body">
-							<h3>專案 B</h3>
-							<p>test</p>
+						<div class="project-action">
+							<a class="btn btn-gradient" href="https://example.com/project1" target="_blank">前往</a>
 						</div>
-					</article>
-					<article class="card">
-						<div class="card-body">
-							<h3>專案 C</h3>
-							<p>test</p>
+					</div><!-- 作品 2 -->
+					<div class="project">
+						<div class="project-info">
+							<h4>作品2名稱</h4>
+							<p>這是作品2的簡短介紹，說明這個作品的特色或用途。</p>
 						</div>
-					</article>
+						<div class="project-action">
+							<a class="btn btn-gradient" href="https://example.com/project2" target="_blank">前往</a>
+						</div>
+					</div>
 				</div>
 			</div>
-		</section><!-- 聯絡我區塊 -->
+		</section><!-- 聯繫我區塊 -->
+		<!-- 聯繫我區塊 -->
 		<section class="section" id="contact">
 			<div class="container">
-				<h2>聯絡我</h2>
-				<p class="muted">歡迎來信與我交流合作 🙌</p>
-				<div class="contact">
-					<button class="btn btn-glass" data-email="chenb1330@gmail.com" id="copyEmailBtn">點擊複製郵件 chenb1330@gmail.com</button> <a class="btn btn-glass" href="https://github.com/Ristu33" rel="noopener noreferrer" target="_blank">GitHub</a>
+				<div class="card-large">
+					<h3>聯繫我</h3>
+					<form id="contactForm" name="contactForm">
+						<div class="form-group">
+							<label for="email">Email</label> <input id="email" placeholder="輸入你的 Email" required="" type="email"> <small id="emailError" style="color: #ff6b6b; display:none;">請輸入正確的 Email 格式</small>
+						</div>
+						<div class="form-group">
+							<label for="message">訊息</label>
+							<div class="textarea-wrapper">
+								<textarea id="message" maxlength="500" placeholder="寫下你想說的話..." required="" rows="5"></textarea> <span id="charCount">0/500</span>
+							</div>
+						</div><button class="btn" type="submit">送出</button>
+					</form>
+					<p id="formStatus" style="margin-top: 1rem;"></p>
 				</div>
 			</div>
 		</section>
 	</main><!-- 回到頂部按鈕 -->
-	<button id="backToTop">回到頂部</button> <!-- Discord 回饋區塊 -->
-	<div class="message-box">
-		<input id="msgInput" placeholder="輸入訊息..." type="text"> <button onclick="sendMessage()">傳送</button>
-	</div>
-	<script>
-	function sendMessage() {
-	 const input = document.getElementById("msgInput");
-
-	 if (!input.value.trim()) {
-	   alert("請輸入訊息！");
-	   return;
-	 }
-
-	 fetch("/send-discord", { // Cloudflare Function URL
-	   method: "POST",
-	   headers: { "Content-Type": "application/json" },
-	   body: JSON.stringify({ message: input.value })
-	 })
-	 .then(res => res.json())
-	 .then(data => {
-	   if (data.success) {
-	     alert("已傳送到 Discord！");
-	     input.value = "";
-	   } else {
-	     alert("傳送失敗: " + data.error);
-	   }
-	 })
-	 .catch(err => {
-	   console.error(err);
-	   alert("傳送失敗！");
-	 });
-	}
-	</script> <!-- Footer -->
+	<button id="backToTop">回到頂部</button> <!-- Footer -->
 	<footer class="site-footer">
 		<div class="container">
 			<p>© <span id="year"></span> Ristu · 保留所有權利</p>
 		</div>
 	</footer><!-- JavaScript -->
 	<script>
-	 // 自動更新年份
-	 document.getElementById('year').textContent = new Date().getFullYear();
+	       // 自動更新年份
+	       document.getElementById('year').textContent = new Date().getFullYear();
 
-	 // 複製郵件功能
-	 const copyEmailBtn = document.getElementById("copyEmailBtn");
-	 copyEmailBtn.addEventListener("click", () => {
-	   const email = copyEmailBtn.getAttribute("data-email");
-	   navigator.clipboard.writeText(email).then(() => {
-	     copyEmailBtn.textContent = "已複製！";
-	     setTimeout(() => {
-	       copyEmailBtn.textContent = "點擊複製郵件 chenb1330@gmail.com";
-	     }, 2000);
-	   });
-	 });
+	       // 深淺模式切換
+	       const themeToggle = document.getElementById("themeToggle");
+	       const backToTop = document.getElementById("backToTop");
 
-	 // 深淺模式切換
-	 const themeToggle = document.getElementById("themeToggle");
-	 const contactBtn = document.getElementById("contactBtn");
-	 const backToTop = document.getElementById("backToTop");
+	       document.body.classList.add("dark-mode");
 
-	 // 預設深色模式
-	 document.body.classList.add("dark-mode");
+	       function updateThemeButtonText() {
+	         themeToggle.textContent = document.body.classList.contains("dark-mode") ? "深色模式" : "淺色模式";
+	       }
+	       updateThemeButtonText();
 
-	 function updateThemeButtonText() {
-	   if(document.body.classList.contains("dark-mode")){
-	     themeToggle.textContent = "深色模式";
-	   } else {
-	     themeToggle.textContent = "淺色模式";
-	   }
+	       themeToggle.addEventListener("click", () => {
+	         document.body.classList.toggle("dark-mode");
+	         updateThemeButtonText();
+	       });
+
+	       // 滾動到頂部
+	       backToTop.addEventListener("click", () => {
+	         window.scrollTo({ top:0, behavior:'smooth' });
+	       });
+	</script> 
+	<script>
+	const emailInput = document.getElementById("email");
+	const emailError = document.getElementById("emailError");
+	const messageInput = document.getElementById("message");
+	const charCount = document.getElementById("charCount");
+	const form = document.getElementById("contactForm");
+
+	// 即時檢查 Email 格式
+	emailInput.addEventListener("input", () => {
+	 const email = emailInput.value.trim();
+	 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	 if (email && !emailPattern.test(email)) {
+	   emailError.style.display = "block";
+	 } else {
+	   emailError.style.display = "none";
 	 }
-	 updateThemeButtonText();
+	});
 
-	 themeToggle.addEventListener("click", () => {
-	   document.body.classList.toggle("dark-mode");
-	   updateThemeButtonText();
-	 });
+	// 更新字數顯示
+	messageInput.addEventListener("input", () => {
+	 const length = messageInput.value.length;
+	 charCount.textContent = `${length}/500`;
+	});
 
-	 // 滾動到頂部
-	 backToTop.addEventListener("click", () => {
-	   window.scrollTo({ top:0, behavior:'smooth' });
-	 });
+	// 表單送出
+	form.addEventListener("submit", async function(e) {
+	 e.preventDefault();
 
-	 // 平滑滾動至聯絡我
-	 contactBtn.addEventListener("click", function(e){
-	   e.preventDefault();
-	   const target = document.querySelector(this.getAttribute('href'));
-	   if(target) target.scrollIntoView({ behavior: 'smooth' });
-	 });
+	 const email = emailInput.value.trim();
+	 const message = messageInput.value.trim();
+	 const statusEl = document.getElementById("formStatus");
 
+	 // 驗證 email 格式
+	 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	 if (!emailPattern.test(email)) {
+	   emailError.style.display = "block";
+	   statusEl.textContent = "❌ 請輸入有效的 Email";
+	   return;
+	 }
+
+	 statusEl.textContent = "傳送中...";
+
+	 try {
+	   const res = await fetch("https://你的-cloudflare-worker-url.workers.dev", {
+	     method: "POST",
+	     headers: { "Content-Type": "application/json" },
+	     body: JSON.stringify({ email, message })
+	   });
+
+	   if (res.ok) {
+	     statusEl.textContent = "✅ 已成功傳送！";
+	     form.reset();
+	     charCount.textContent = "0/500";
+	   } else {
+	     statusEl.textContent = "❌ 傳送失敗，請稍後再試";
+	   }
+	 } catch (err) {
+	   statusEl.textContent = "⚠️ 發生錯誤：" + err.message;
+	 }
+	});
 	</script>
 </body>
 </html>
