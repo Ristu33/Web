@@ -165,7 +165,7 @@
 	 statusEl.textContent = "傳送中...";
 
 	 try {
-	   const res = await fetch("https://你的-cloudflare-worker-url.workers.dev", {
+	   const res = await fetch("https://raw.githubusercontent.com/Ristu33/Web/refs/heads/main/functions/send-discord.js", {
 	     method: "POST",
 	     headers: { "Content-Type": "application/json" },
 	     body: JSON.stringify({ email, message })
@@ -185,3 +185,4 @@
 	</script>
 </body>
 </html>
+
