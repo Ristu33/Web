@@ -35,11 +35,11 @@ body.dark-mode {
 }
 body:not(.dark-mode) {
 	--glass-bg: rgba(255, 255, 255, 0.5);
-	--glass-border: rgba(200, 200, 200, 0.3);
-	--text-primary: #1a1a1a;
+	--glass-border: rgba(179, 175, 175, 0.3);
+	--text-primary: #252424;
 	--text-secondary: #4a4a4a;
 	--grad-soft: linear-gradient(135deg, #fce4ec 0%, #d0d4fe 45%, #d0f0eb 100%);
-	background: #e0e0e0;
+	background: #f1f1f1;
 }
 /* ===================== Background decoration ===================== */
 
@@ -187,6 +187,7 @@ body:not(.dark-mode) {
 	font-size: 1rem;
 	font-weight: 600;
 	cursor: pointer;
+	transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 .btn-gradient {
 	background: var(--grad-soft);
@@ -211,6 +212,7 @@ body:not(.dark-mode) {
 	border: 1px solid var(--glass-border);
 	color: var(--text-primary);
 	cursor: pointer;
+	transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 #backToTop:hover {
 	transform: translateY(-2px);
@@ -273,46 +275,65 @@ body:not(.dark-mode) {
 }
 /* 作品 Cards */
 
+/* 卡片容器改為上下排列 */
+
 .cards {
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
+	/* 上下堆疊 */
 	gap: 1.5rem;
+	/* 卡片間距 */
 }
+/* 卡片本身 */
+
 .card {
-	flex: 1 1 calc(33% - 1rem);
-	min-width: 250px;
+	background: var(--glass-bg);
+	backdrop-filter: blur(20px) saturate(120%);
+	border: 1px solid var(--glass-border);
 	border-radius: 24px;
 	padding: 1.5rem;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.card:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
-}
-.card-body h3 {
-	margin-bottom: 0.5rem;
-}
-.card-body p {
-	color: var(--text-secondary);
-}
-/* 聯絡我 */
+/* 卡片內部左右分區 */
 
-#contact {
-	text-align: center;
-}
-#contact h2 {
-	font-size: 2rem;
-	margin-bottom: 1rem;
-}
-#contact .muted {
-	color: var(--text-secondary);
-	margin-bottom: 2rem;
-}
-#contact .contact {
+.card-inner {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: center;
 	gap: 1rem;
+}
+/* 左側文字區 */
+
+.card-info {
+	flex: 1;
+	padding: 1rem;
+	border: 1px solid var(--glass-border);
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.05);
+}
+/* 右側按鈕區 */
+
+.card-action {
+	flex-shrink: 0;
+	padding: 1rem;
+	border: 1px solid var(--glass-border);
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.05);
+	display: flex;
+	align-items: center;
+}
+/* 手機響應式 */
+
+@media (max-width: 768px) {
+	.card-inner {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.card-action {
+		margin-top: 1rem;
+		justify-content: flex-start;
+	}
 }
 /* Footer */
 
@@ -327,68 +348,142 @@ body:not(.dark-mode) {
 	align-items: center;
 	text-align: center;
 }
-/* ===================== 響應式 ===================== */
+/* 大框 */
+
+.card-large {
+	background: var(--glass-bg);
+	backdrop-filter: blur(20px) saturate(120%);
+	border: 1px solid var(--glass-border);
+	border-radius: 24px;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+/* 大框標題 */
+
+.card-large h3 {
+	margin-bottom: 0.5rem;
+	color: var(--text-primary);
+}
+/* 每個作品 */
+
+.project {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.05);
+	gap: 1rem;
+}
+/* 左側文字區 */
+
+.project-info {
+	flex: 1;
+}
+/* 前往按鈕 */
+
+.project-action .btn {
+	background: var(--glass-bg);
+	color: var(--text-primary);
+	border-radius: 12px;
+	padding: 0.75rem 1rem;
+	cursor: pointer;
+	transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+	text-decoration: none;
+	/* a 標籤去掉下劃線 */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: none;
+	/* 預設沒有陰影 */
+}
+/* hover 效果 */
+
+.project-action .btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(248, 200, 220, 0.25);
+}
+/* 響應式：手機改上下排列 */
 
 @media (max-width: 768px) {
-	.container.header-inner {
+	.project {
 		flex-direction: column;
-		gap: 0.5rem;
+		align-items: stretch;
 	}
-	.site-nav ul {
-		flex-direction: column;
-	}
-	.about-card {
-		flex-direction: column;
-		align-items: center;
-	}
-	.cards {
-		flex-direction: column;
+	.project-action {
+		margin-top: 1rem;
+		justify-content: flex-start;
 	}
 }
-@media (max-width: 480px) {
-	.glass-card {
-		padding: 1.5rem;
-	}
-	.btn-row {
-		flex-direction: column;
-	}
-}
-.message-box {
+/* 聯繫我表單 */
+
+#contact form {
 	display: flex;
-	justify-content: center;
-	margin: 40px 0;
+	flex-direction: column;
+	gap: 1rem;
 }
-.message-box input {
-	width: 300px;
-	padding: 10px;
-	border-radius: 12px 0 0 12px;
-	border: 1px solid rgba(255, 255, 255, 0.8);
-	/* 白色邊框 */
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.form-group label {
+	font-weight: 600;
+	color: var(--text-primary);
+}
+.form-group input, .form-group textarea {
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--glass-border);
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.05);
+	color: var(--text-primary);
+	font-size: 1rem;
 	outline: none;
-	background: var(--glass-bg-dark);
-	color: var(--text-primary-dark);
-	backdrop-filter: blur(6px);
-	transition: background 0.5s, color 0.5s, border 0.5s;
 }
-body.light .message-box input {
-	background: var(--glass-bg-light);
-	color: var(--text-primary-light);
-	border: 1px solid rgba(255, 255, 255, 0.8);
-	/* 白色邊框 */
+.form-group input:focus, .form-group textarea:focus {
+	border-color: #a5b4fc;
+	box-shadow: 0 0 8px rgba(165, 180, 252, 0.4);
 }
-.message-box button {
-	border-radius: 0 12px 12px 0;
-	padding: 10px 15px;
-	border: 1px solid rgba(255, 255, 255, 0.8);
-	/* 白色邊框 */
-	background: var(--glass-bg-dark);
-	color: var(--text-primary-dark);
-	cursor: pointer;
-	transition: background 0.5s, color 0.5s, border 0.5s;
+#contact button.btn {
+	align-self: flex-start;
+	background: var(--glass-bg);
+	color: var(--text-primary);
 }
-body.light .message-box button {
-	background: var(--glass-bg-light);
-	color: var(--text-primary-light);
-	border: 1px solid rgba(255, 255, 255, 0.8);
-	/* 白色邊框 */
+#contact button.btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(248, 200, 220, 0.25);
+}
+/* 包住 textarea 的容器 */
+
+.textarea-wrapper {
+	position: relative;
+	width: 100%;
+}
+/* 文字框 */
+
+.textarea-wrapper textarea {
+	width: 100%;
+	padding: 1rem;
+	padding-bottom: 2rem;
+	/* 預留空間給字數計數器 */
+	border-radius: 12px;
+	border: 1px solid var(--glass-border);
+	background: var(--glass-bg);
+	color: var(--text-primary);
+	resize: none;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+/* 字數顯示在框內右下角 */
+
+#charCount {
+	position: absolute;
+	bottom: 8px;
+	right: 12px;
+	font-size: 0.8rem;
+	color: var(--text-secondary);
+	pointer-events: none;
+	/* 不影響輸入 */
 }
