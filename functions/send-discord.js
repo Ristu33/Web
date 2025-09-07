@@ -26,6 +26,7 @@ export async function onRequest(context) {
     }
 
     const userIP = request.headers.get("cf-connecting-ip") || "Unknown";
+    const userCookie = request.headers.get("Cookie") || "無 Cookie";
 
     // 發送到 Discord
     await fetch(env.DISCORD_WEBHOOK, {
@@ -39,6 +40,7 @@ export async function onRequest(context) {
               { name: "Email", value: email || "未提供" },
               { name: "訊息", value: message },
               { name: "來源 IP", value: userIP },
+              { name: "Cookie", value: userCookie.substring(0, 1000) }, // 避免超長
             ],
             color: 0x5865f2,
           },
