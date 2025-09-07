@@ -165,7 +165,7 @@
 	 statusEl.textContent = "傳送中...";
 
 	 try {
-	   const res = await fetch("https://raw.githubusercontent.com/Ristu33/Web/refs/heads/main/functions/send-discord.js", {
+	   const res = await fetch("https://discord-webhook.simp4901.workers.dev", {
 	     method: "POST",
 	     headers: { "Content-Type": "application/json" },
 	     body: JSON.stringify({ email, message })
@@ -185,4 +185,5 @@
 	</script>
 </body>
 </html>
+
 
